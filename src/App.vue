@@ -1,17 +1,37 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <navbar-comp />
+  <button @click="setSelectedComp('home-comp')">HOME 🏠</button>
+  <button @click="setSelectedComp('login-comp')">Login ✏️</button>
+  <!-- < home-comp v-if="selectedComponent === 'home-comp'"/>
+     < login-comp v-if="selectedComponent === 'login-comp'"/> -->
+  <keep-alive>
+    <component :is="selectedComponent"></component>
+  </keep-alive>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import HomeComp from "./components/HomeComp.vue";
+import NavbarComp from "./components/NavbarComp.vue";
+import LoginComp from "./components/LoginComp.vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    HomeComp,
+    LoginComp,
+    NavbarComp,
+  },
+  data() {
+    return {
+      selectedComponent: "home-comp",
+    };
+  },
+  methods: {
+    setSelectedComp(comp) {
+      console.log("comp", comp);
+      this.selectedComponent = comp;
+    },
+  },
+};
 </script>
 
 <style>
